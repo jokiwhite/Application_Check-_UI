@@ -88,7 +88,7 @@
       <el-table-column label="操作" align="center"   width="200"  >
         <template slot-scope="scope">
           <router-link :to="'/feedbackprojectinformation/detection2/'+scope.row.id">
-            <el-button :disabled="scope.row.statusweb== 2 ? false : true" type="primary" size="mini" icon="el-icon-edit">结果概览</el-button>
+            <el-button :disabled="scope.row.statusweb== 2||3 ? false : true" type="primary" size="mini" icon="el-icon-edit">结果概览</el-button>
         </router-link>
      <!-- <el-button :disabled="scope.row.statusweb== 2 ? false : true"  type="success" size="mini" icon="el-icon-delete" @click="updateStatus(scope.row.id,scope.row,'1')" >通过审核</el-button> -->
         </template>
@@ -117,7 +117,8 @@ export default {
       const statusMap = {
         1: 'success',
         2:  'danger',
-        3: 'info'
+        0: 'info',
+        3:'danger'
       }
       return statusMap[statusWeb]
     },
@@ -125,8 +126,9 @@ export default {
     formatStata(statusWeb) {
       const statusMap = {
         1: '查重通过',
-        2: '严重重复',
-        3: '  待定  ',
+        2: '疑似重复',
+        0: ' 待检测  ',
+        3:'去年重复提交'
       }
       return statusMap[statusWeb]
     }

@@ -33,7 +33,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            严重重复报告书
+            疑似重复报告书
           </div>
           <count-to :start-val="0" :end-val="this.Rtotal" :duration="3600" class="card-panel-num" />
         </div>

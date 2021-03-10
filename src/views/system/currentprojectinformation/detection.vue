@@ -13,17 +13,17 @@
       :cell-style="cellStyle" 
       
       style="width: 100%">
-      <el-table-column prop="currentArticleParagraphNum"  header-align="center" label="段落号" width="100" ></el-table-column>
+      <el-table-column prop="currentArticleParagraphNum"  header-align="center" label="原文详情"  ></el-table-column>
 
-      <el-table-column prop="currentArticleParagraphContent"  header-align="center" label="原文" width="400" ></el-table-column>
+      <el-table-column prop="currentArticleParagraphContent"  header-align="center" label="原文内容" width="400" ></el-table-column>
 
-        <el-table-column prop="comparedArticleID" :formatter="id2Name"  header-align="center" label="相似文章名称"  ></el-table-column>
+        <el-table-column prop="comparedArticleID" :formatter="id2Name"  header-align="center" label="相似文章详情"  ></el-table-column>
 
-        <el-table-column prop="comparedArticleParagraphContent" header-align="center"  label="相似文章内容" width="400"  ></el-table-column>
+        <el-table-column prop="comparedArticleParagraphContent" header-align="center"  label="相似内容" width="400"  ></el-table-column>
 
-        <el-table-column prop="result" header-align="center"  label="相似度"  width="100">
+        <el-table-column prop="yuxuan" header-align="center"  label="相似度"  width="100">
             <template slot-scope="scope">
-               {{Number(scope.row.result*100).toFixed()+'%'}}
+               {{Number(scope.row.yuxuan*100).toFixed()+'%'}}
             </template>
         </el-table-column>
 
@@ -108,7 +108,7 @@ export default {
               this.pos = 0
             } else {
               // 判断当前元素与上一个元素是否相同
-            if (data[i].currentArticleParagraphNum === data[i - 1].currentArticleParagraphNum) {
+            if (data[i].comparedArticleID ===data[i-1].comparedArticleID) {
                 this.spanArr[this.pos] += 1;
                 this.spanArr.push(0);
               } else {
@@ -120,7 +120,7 @@ export default {
         }
     },
     objectSpanMethod({ row, column, rowIndex, columnIndex }) {
-          if (columnIndex === 0||columnIndex === 1) {
+          if (columnIndex === 2||columnIndex === 0) {
             const _row = this.spanArr[rowIndex];
             const _col = _row > 0 ? 1 : 0;
 

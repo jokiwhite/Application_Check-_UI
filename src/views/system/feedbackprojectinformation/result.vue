@@ -164,7 +164,7 @@ export default {
       const statusMap = {
         1: 'success',
         2:  'danger',
-        3: 'info'
+        0: 'info'
       }
       return statusMap[statusWeb]
     },
@@ -173,7 +173,7 @@ export default {
       const statusMap = {
         1: '查重通过',
         2: '严重重复',
-        3: '  待定  ',
+        0: '  待定  ',
       }
       return statusMap[statusWeb]
     }

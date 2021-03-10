@@ -5,5 +5,4 @@ export function   start(pythonName,pythonPassword){
         url:`/system/python/start/${pythonName}/${pythonPassword}`,
         method: 'post'
       })
-
 }

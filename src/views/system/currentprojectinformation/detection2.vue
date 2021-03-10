@@ -1,8 +1,13 @@
 <template>
     <div class="app-container">
-      <el-form :inline="true" :model="currentInformation" >
+      <el-form  :model="currentInformation" >
   <el-form-item label="项目名称" >
     <el-input v-model="currentInformation.projectname" ></el-input>
+  </el-form-item>
+
+</el-form>
+      <el-form :inline="true" :model="currentInformation" >
+ 
   </el-form-item>
   <el-form-item label="申请人" >
     <el-input v-model="currentInformation.personname" ></el-input>
@@ -36,7 +41,7 @@
       
       style="width: 100%">
 
-      <el-table-column prop="article1Name"  header-align="center" label="原文名称" ></el-table-column>
+      <!-- <el-table-column prop="article1Name"  header-align="center" label="原文名称" ></el-table-column> -->
 
         <el-table-column prop="article2Name" align="center"  header-align="center" label="相似文章名称"  ></el-table-column>
         <el-table-column prop="personName" align="center"  header-align="center" label="申请人"  ></el-table-column>
