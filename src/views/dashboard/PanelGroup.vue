@@ -35,7 +35,7 @@
           <div class="card-panel-text">
             疑似重复报告书
           </div>
-          <count-to :start-val="0" :end-val="this.Rtotal" :duration="3600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="this.Rtotal+this.R1total" :duration="3600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -44,8 +44,7 @@
 
 <script>
 import CountTo from 'vue-count-to'
-import { listCurrentprojectinformation } from "@/api/system/currentprojectinformation";
-import {  listFeedbackprojectinformation } from "@/api/system/feedbackprojectinformation";
+import { listCurrentprojectinformation,listFeedBack } from "@/api/system/currentprojectinformation";
 export default {
   components: {
     CountTo
@@ -55,16 +54,25 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize:50,
-       
+      },
+      queryParams1: {
+        pageNum: 1,
+        pageSize:50,
       },
       queryParams2: {
         pageNum: 1,
         pageSize:50,
-        statusweb: 2,
+        statusweb: 2
+      },
+        queryParams3: {
+        pageNum: 1,
+        pageSize:50,
+        statusweb: 3
       },
       Ftotal:0,
       Ctotal:0,
-      Rtotal:0
+      Rtotal:0,
+      R1total:0
     }
   },
   created() {
@@ -87,15 +95,18 @@ export default {
     },
    
     getTotal(){
-    listFeedbackprojectinformation(this.queryParams).then(response => {
+    listFeedBack(this.queryParams).then(response => {
         this.Ftotal = response.total;
       });
 
-    listCurrentprojectinformation(this.queryParams).then(response => {
+    listCurrentprojectinformation(this.queryParams1).then(response => {
         this.Ctotal = response.total;
       });
     listCurrentprojectinformation(this.queryParams2).then(response => {
         this.Rtotal = response.total;
+      });
+      listCurrentprojectinformation(this.queryParams3).then(response => {
+        this.R1total = response.total;
       });
 
     }

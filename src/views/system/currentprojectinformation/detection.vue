@@ -15,9 +15,11 @@
       style="width: 100%">
       <el-table-column prop="currentArticleParagraphNum"  header-align="center" label="原文详情"  ></el-table-column>
 
+      <el-table-column prop="comparedArticleID" :formatter="id2Name"  header-align="center" label="相似文章详情"  ></el-table-column>
+
       <el-table-column prop="currentArticleParagraphContent"  header-align="center" label="原文内容" width="400" ></el-table-column>
 
-        <el-table-column prop="comparedArticleID" :formatter="id2Name"  header-align="center" label="相似文章详情"  ></el-table-column>
+        
 
         <el-table-column prop="comparedArticleParagraphContent" header-align="center"  label="相似内容" width="400"  ></el-table-column>
 
@@ -79,7 +81,7 @@ export default {
             this.findById(id)
             }else{
                 this.findById(10)
-                console.log("################")
+                
             }
         },
       
@@ -120,7 +122,7 @@ export default {
         }
     },
     objectSpanMethod({ row, column, rowIndex, columnIndex }) {
-          if (columnIndex === 2||columnIndex === 0) {
+          if (columnIndex === 1||columnIndex === 0) {
             const _row = this.spanArr[rowIndex];
             const _col = _row > 0 ? 1 : 0;
 

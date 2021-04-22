@@ -59,7 +59,15 @@ export function listCurrentprojectinformationAfter(query) {
 // 查询本年度项目书列表
 export function listCurrentprojectinformation(query) {
   return request({
-    url: '/system/currentprojectinformation/list',
+    url: '/system/currentprojectinformation/listCurrent',
+    method: 'get',
+    params: query
+  })
+}
+
+export function listFeedBack(query) {
+  return request({
+    url: '/system/currentprojectinformation/listFeedBack',
     method: 'get',
     params: query
   })

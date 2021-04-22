@@ -36,15 +36,25 @@
                   </el-option>
               </el-select>   
       </el-form-item>
+
+           <el-form-item  prop="statusweb">
+        <el-select v-model="queryParams.statusweb" placeholder="查重结果">
+           <el-option v-for="item in condition.allStatusWeb"
+                  :key="item"
+                  :label="item.label"
+                  :value="item.value">
+                  </el-option>
+        </el-select>
+        </el-form-item>
      
-      <el-form-item  prop="statusweb">
+      <!-- <el-form-item  prop="statusweb">
         <el-input
           v-model="queryParams.statusweb"
           placeholder="查重状态"
         
           @keyup.enter.native="handleQuery"
         /> 
-      </el-form-item>
+      </el-form-item> -->
 
   
       
@@ -76,23 +86,23 @@
       
       <el-table-column label="申请年份" align="center" prop="applyyear" width="100" />
     
-      <el-table-column label="查重状态" align="center" width="100">
+      <el-table-column label="处理状态" align="center" width="100">
       <template slot-scope="scope">
         <el-tag :type="scope.row.statusweb | statusFilter">
           {{ scope.row.statusweb | formatStata }}
         </el-tag>
       </template>
     </el-table-column>
-     <el-table-column label="相似度" align="center" prop="checkrate"  width="100" />
+     <el-table-column   width="30" />
      
-      <el-table-column label="操作" align="center"   width="200"  >
+      <!-- <el-table-column label="操作" align="center"   width="200"  >
         <template slot-scope="scope">
           <router-link :to="'/feedbackprojectinformation/detection2/'+scope.row.id">
-            <el-button :disabled="scope.row.statusweb== 2||3 ? false : true" type="primary" size="mini" icon="el-icon-edit">结果概览</el-button>
+            <el-button :disabled="scope.row.statusweb== 2 ? false : true" type="primary" size="mini" icon="el-icon-edit">结果概览</el-button>
         </router-link>
-     <!-- <el-button :disabled="scope.row.statusweb== 2 ? false : true"  type="success" size="mini" icon="el-icon-delete" @click="updateStatus(scope.row.id,scope.row,'1')" >通过审核</el-button> -->
+     
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
     
     <pagination
@@ -102,8 +112,6 @@
       :limit.sync="queryParams.pageSize"
       @pagination="getList"
     />
-
-    
   </div>
 </template>
 
@@ -128,7 +136,7 @@ export default {
         1: '查重通过',
         2: '疑似重复',
         0: ' 待检测  ',
-        3:'去年重复提交'
+        3:'往年重复提交'
       }
       return statusMap[statusWeb]
     }
@@ -156,58 +164,7 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        applycode1: undefined,
-        projectname: undefined,
-        personname: undefined,
-        fundingtype: undefined,
-        sciencenumber: undefined,
-        versionnumber: undefined,
-        college: undefined,
-        applyyear: undefined,
-        submittime: undefined,
-        status: undefined,
-        projectenglishname: undefined,
-        applycode2: undefined,
-        subclassdescription: undefined,
-        notedescription: undefined,
-        startdata: undefined,
-        enddata: undefined,
-        base: undefined,
-        mainresearch: undefined,
-        researchdirection: undefined,
-        chineseabstract: undefined,
-        englishabstract: undefined,
-        chinesekeyword: undefined,
-        englishkeyword: undefined,
-        supportingunit: undefined,
-        unitcontact: undefined,
-        unitcontactemail: undefined,
-        unitcontactphone: undefined,
-        collegecontact: undefined,
-        collegecontactemail: undefined,
-        collegecontactphone: undefined,
-        peaplelistname: undefined,
-        peaplelistemail: undefined,
-        peaplelistjob: undefined,
-        peaplelistunitname: undefined,
-        peaplelistwork: undefined,
-        totalnumber: undefined,
-        advanced: undefined,
-        intermediate: undefined,
-        primary1: undefined,
-        postdoc: undefined,
-        phd: undefined,
-        master: undefined,
-        applypersontype: undefined,
-        scientificresearchprojects: undefined,
-        scientificproblemattributes: undefined,
-        scientificproblemattributescontent: undefined,
-        pdfdownloadaddress: undefined,
-        processed: undefined,
-        detected: undefined,
-        statusweb: undefined,
-        updatetime: undefined,
-        checkrate: undefined
+        applyyear:1//1代表本年度
       },
       // 表单参数
       form: {},
@@ -215,6 +172,12 @@ export default {
       rules: {
       },
        condition:{
+         "allStatusWeb":[
+          {label:"往年重复提交",value:3},
+          {label:"疑似重复",value:2},
+          {label:"待检测",value:0},
+          {label:"查重通过",value:1}
+        ],
     "allCollege": [
       "数学与统计学院",
       "自动化学院",

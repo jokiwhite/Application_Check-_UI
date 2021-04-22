@@ -36,15 +36,25 @@
                   </el-option>
               </el-select>   
       </el-form-item>
+
+       <el-form-item  prop="applyyear">
+          <el-select v-model="queryParams.applyyear" placeholder="年份">
+           <el-option v-for="item in condition.applyyear"
+                  :key="item"
+                  :label="item"
+                  :value="item">
+                  </el-option>
+              </el-select>   
+      </el-form-item>
      
-      <el-form-item  prop="statusweb">
+      <!-- <el-form-item  prop="statusweb">
         <el-input
           v-model="queryParams.statusweb"
           placeholder="查重状态"
         
           @keyup.enter.native="handleQuery"
         /> 
-      </el-form-item>
+      </el-form-item> -->
 
   
       
@@ -77,8 +87,9 @@
       </template>
     </el-table-column>
       <el-table-column label="操作" align="center" >
-        <template slot-scope="scope">
-          
+
+
+        <template slot-scope="scope"> 
      <el-button type="primary" size="mini" icon="el-icon-delete" @click="dialog(scope.row)" >查看详情</el-button></el-button>
         </template>
       </el-table-column>
@@ -86,62 +97,70 @@
 
 
        <el-dialog :title="title" :visible.sync="open" width="900px" append-to-body>
-      <el-form :inline="true" ref="form" :model="form" :rules="rules" >
-     <el-form-item label="id值" prop="id">
-          <el-input v-model="form.id" placeholder="无" />
+      <el-form ref="form" :model="form" :rules="rules" >
+        <el-form-item label="科学号" prop="sciencenumber">
+          <span>{{form.sciencenumber}}</span>
+          <!-- <el-input v-model="form.sciencenumber" placeholder="无" /> -->
+        </el-form-item>
+          <el-form-item label="项目名称" prop="projectname">
+             <span>{{form.projectname}}</span>
+          <!-- <el-input v-model="form.projectname" placeholder="无" /> -->
+        </el-form-item>
+         <el-form-item label="申请人" prop="personname">
+           <span>{{form.personname}}</span>
+          <!-- <el-input v-model="form.personname" placeholder="无" /> -->
         </el-form-item>
         <el-form-item label="申请年份" prop="applyyear">
-          <el-input v-model="form.applyyear" placeholder="无" />
-        </el-form-item>
-        <el-form-item label="科学号" prop="sciencenumber">
-          <el-input v-model="form.sciencenumber" placeholder="无" />
-        </el-form-item>
-        <el-form-item label="项目名称" prop="projectname">
-          <el-input v-model="form.projectname" placeholder="无" />
-        </el-form-item>
-        <el-form-item label="申请人" prop="personname">
-          <el-input v-model="form.personname" placeholder="无" />
-        </el-form-item>
-        <el-form-item label="申请代码" prop="applycode1">
-          <el-input v-model="form.applycode1" placeholder="无" />
+           <span>{{form.applyyear}}</span>
+          <!-- <el-input v-model="form.applyyear" placeholder="无" /> -->
         </el-form-item>
         <el-form-item label="资助类型" prop="fundingtype">
-          <el-input v-model="form.fundingtype" placeholder="无" />
+           <span>{{form.fundingtype}}</span>
+          <!-- <el-input v-model="form.fundingtype" placeholder="无" /> -->
         </el-form-item>
-        
+      <el-form-item label="所属院系" prop="college">
+        <span>{{form.college}}</span>
+          <!-- <el-input v-model="form.college" placeholder="无" /> -->
+        </el-form-item>
+       
+        <el-form-item label="申请代码" prop="applycode1">
+           <span>{{form.applycode1}}</span>
+          <!-- <el-input v-model="form.applycode1" placeholder="无" /> -->
+        </el-form-item>
+
         <el-form-item label="资助金额" prop="money">
-          <el-input v-model="form.money" placeholder="无" />
+           <span>{{form.money}}</span>
+          <!-- <el-input v-model="form.money" placeholder="无" /> -->
         </el-form-item>
-        <el-form-item label="项目申请号" prop="projectapprovalnumber">
-          <el-input v-model="form.projectapprovalnumber" placeholder="无" />
+        <el-form-item label="申请人职称" prop="jobtitle">
+          <span>{{form.jobtitle}}</span>
+          <!-- <el-input v-model="form.jobtitle" placeholder="无" /> -->
         </el-form-item>
         
         <el-form-item label="项目英文名" prop="projectenglishname">
-          <el-input v-model="form.projectenglishname" placeholder="无" />
+          <span>{{form.projectenglishname}}</span>
+          <!-- <el-input v-model="form.projectenglishname" placeholder="无" /> -->
         </el-form-item>
        
-        <el-form-item label="项目号" prop="projectapprovaldocumentnumber">
+        <!-- <el-form-item label="项目号" prop="projectapprovaldocumentnumber">
           <el-input v-model="form.projectapprovaldocumentnumber" placeholder="无" />
-        </el-form-item>
-        <el-form-item label="所属院系" prop="college">
-          <el-input v-model="form.college" placeholder="无" />
-        </el-form-item>
+        </el-form-item> -->
         
-        <el-form-item label="职称" prop="jobtitle">
+        
+        <!-- <el-form-item label="职称" prop="jobtitle">
           <el-input v-model="form.jobtitle" placeholder="无" />
-        </el-form-item>
+        </el-form-item> -->
        
-        <el-form-item label="开始时间" prop="startendtime">
+        <!-- <el-form-item label="起止时间" prop="startendtime">
           <el-input v-model="form.startendtime" placeholder="无" />
-        </el-form-item>
+        </el-form-item> -->
         
       </el-form>
       <div slot="footer" class="dialog-footer">
         
-        <el-button @click="cancel">取 消</el-button>
+        <el-button @click="cancel">关闭</el-button>
       </div>
     </el-dialog>
-    
     <pagination
       v-show="total>0"
       :total="total"
@@ -155,8 +174,7 @@
 </template>
 
 <script>
-import {  listFeedbackprojectinformation, getFeedbackprojectinformation } from "@/api/system/feedbackprojectinformation";
-
+import {listFeedBack ,getCurrentprojectinformation} from "@/api/system/currentprojectinformation";
 export default {
   filters: {
     // el-tag类型转换
@@ -203,24 +221,6 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize:50,
-        applyyear: undefined,
-        sciencenumber: undefined,
-        projectname: undefined,
-        personname: undefined,
-        applycode1: undefined,
-        fundingtype: undefined,
-        money: undefined,
-        projectapprovalnumber: undefined,
-        applycode2: undefined,
-        projectenglishname: undefined,
-        unitname: undefined,
-        projectapprovaldocumentnumber: undefined,
-        college: undefined,
-        cooperativeresearchunit: undefined,
-        jobtitle: undefined,
-        researchnature: undefined,
-        startendtime: undefined,
-        statusweb: undefined
       },
       // 表单参数
       form: {},
@@ -228,6 +228,11 @@ export default {
       rules: {
       },
       condition:{
+        "applyyear":[
+          2018,
+          2019,
+          2020
+        ],
     "allCollege": [
       "数学与统计学院",
       "自动化学院",
@@ -320,7 +325,7 @@ export default {
       dialog(row) {
      this.reset();
       const id = row.id || this.ids
-      getFeedbackprojectinformation(id).then(response => {
+      getCurrentprojectinformation(id).then(response => {
         this.form = response.data;
         this.open = true;
         this.title = "项目详情";
@@ -329,7 +334,7 @@ export default {
     /** 查询列表 */
     getList() {
       this.loading = true;
-      listFeedbackprojectinformation(this.queryParams).then(response => {
+      listFeedBack(this.queryParams).then(response => {
         this.feedbackprojectinformationList = response.rows;
         this.total = response.total;
         this.loading = false;

@@ -20,7 +20,11 @@
       </el-form-item>
       <el-form-item  prop="fundingtype">
         <el-select v-model="queryParams.fundingtype" placeholder="项目类型">
-          <el-option label="请选择字典生成" value="" />
+           <el-option v-for="item in condition.allFundingType"
+                  :key="item"
+                  :label="item"
+                  :value="item">
+                  </el-option>
         </el-select>
       </el-form-item>
       
@@ -34,12 +38,19 @@
       </el-form-item>
      
       <el-form-item  prop="statusweb">
-        <el-input
+        <el-select v-model="queryParams.statusweb" placeholder="查重结果">
+           <el-option v-for="item in condition.allStatusWeb"
+                  :key="item"
+                  :label="item.label"
+                  :value="item.value">
+                  </el-option>
+        </el-select>
+        <!-- <el-input
           v-model="queryParams.statusweb"
-          placeholder="查重状态"
+          placeholder="查重结果"
         
           @keyup.enter.native="handleQuery"
-        /> 
+        />  -->
       </el-form-item>
 
   
@@ -72,7 +83,7 @@
       
        <el-table-column label="申请年份" align="center" prop="applyyear" width="100" />
     
-      <el-table-column label="查重状态" align="center" width="100">
+      <el-table-column label="查重结果" align="center" width="100">
       <template slot-scope="scope">
         <el-tag :type="scope.row.statusweb | statusFilter">
           {{ scope.row.statusweb | formatStata }}
@@ -124,7 +135,7 @@ export default {
         1: '查重通过',
         2: '疑似重复',
         0: '  待定  ',
-        3:'去年重复提交'
+        3:'往年重复提交'
       }
       return statusMap[statusWeb]
     }
@@ -204,6 +215,31 @@ export default {
         statusweb: undefined,
         updatetime: undefined,
         checkrate: undefined
+      },
+      condition:{
+        "allStatusWeb":[
+          {label:"往年重复提交",value:3},
+          {label:"疑似重复",value:2},
+        ],
+         "allFundingType": [
+      "青年科学基金项目",
+      "国际(地区)合作与交流项目",
+      "International (Regional) Cooperation And Exchange Project",
+      "优秀青年科学基金项目",
+      "国家杰出青年科学基金",
+      "专项基金项目",
+      "国家重大科研仪器研制项目",
+      "重点项目",
+      "应急管理项目",
+      "面上项目",
+      "海外及港澳学者合作研究基金",
+      "创新研究群体项目",
+      "重大项目",
+      "重大研究计划",
+      "联合基金项目",
+      "专项项目",
+      "科学中心项目"
+    ]
       },
       // 表单参数
       form: {},

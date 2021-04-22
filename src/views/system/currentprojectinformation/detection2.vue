@@ -1,25 +1,35 @@
 <template>
     <div class="app-container">
-      <el-form  :model="currentInformation" >
-  <el-form-item label="项目名称" >
+      <!-- <el-form  :model="currentInformation" >
+  <el-form-item label="项目名称:" >
+    <span>{{currentInformation.projectname}}</span>
     <el-input v-model="currentInformation.projectname" ></el-input>
   </el-form-item>
 
-</el-form>
+</el-form> -->
       <el-form :inline="true" :model="currentInformation" >
+
+         <el-form-item label="项目名称:" >
+    <span>{{currentInformation.projectname}}</span>
+    <!-- <el-input v-model="currentInformation.projectname" ></el-input> -->
+  </el-form-item>
  
   </el-form-item>
-  <el-form-item label="申请人" >
-    <el-input v-model="currentInformation.personname" ></el-input>
+  <el-form-item label="申请人:" >
+    <span>{{currentInformation.personname}}</span>
+    <!-- <el-input v-model="currentInformation.personname" ></el-input> -->
   </el-form-item>
-  <el-form-item label="项目类型" >
-    <el-input v-model="currentInformation.fundingtype" ></el-input>
+  <el-form-item label="项目类型:" >
+    <span>{{currentInformation.fundingtype}}</span>
+    <!-- <el-input v-model="currentInformation.fundingtype" ></el-input> -->
   </el-form-item>
-  <el-form-item label="所属学院" >
-    <el-input v-model="currentInformation.college" ></el-input>
+  <el-form-item label="所属学院:" >
+    <span>{{currentInformation.college}}</span>
+    <!-- <el-input v-model="currentInformation.college" ></el-input> -->
   </el-form-item>
-  <el-form-item label="申请年份" >
-    <el-input v-model="currentInformation.applyyear" ></el-input>
+  <el-form-item label="申请年份:" >
+    <span>{{currentInformation.applyyear}}</span>
+    <!-- <el-input v-model="currentInformation.applyyear" ></el-input> -->
   </el-form-item>
 </el-form>
  <el-button type="info" round v-on:click="backHistory">返回</el-button>
@@ -49,7 +59,7 @@
         <el-table-column prop="college" align="center"  header-align="center" label="所属学院"  ></el-table-column>
         <el-table-column prop="applyYear" align="center"  header-align="center" label="申请年份"  ></el-table-column>
         <el-table-column prop="comparedNum" align="center"  header-align="center" width="100"  label="相似段落数"  ></el-table-column>
-        <el-table-column prop="comparedNum" align="center"  header-align="center" width="100"  label="综合相似度"  ></el-table-column>
+        
 
 
 
